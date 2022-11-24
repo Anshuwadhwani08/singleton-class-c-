@@ -6,35 +6,49 @@ using System.Threading.Tasks;
 
 namespace counter_with_singleton_class
 {
-    internal class Program
+    public class Program
     {
-        public class Counter
-        {
-            
-            public int count = 8;
-            private static readonly Counter instance = new Counter();
-            private Counter() { }
-
-            public static Counter getInstance() { return instance; }
-            public void  Increment()
-            {
-                Console.WriteLine("count increment = " + ++count);
-                
-            }
-            public void Decrement()
-            {
-                Console.WriteLine("count decrement = " + --count);
-                
-            }
-        }
         static void Main(string[] args)
         {
-            Counter counter = Counter.getInstance();
-            Console.WriteLine(counter.count);
-            counter.Increment();
-            counter.Decrement();
-            Console.ReadLine();
+            var a = Counter.GetCounter();
+            int b = a.Increment;
+            Console.WriteLine("incremented value ="+ b);
+            int c = a.Decrement;
+            Console.WriteLine("decremented value =" + c);
+            Console.ReadKey();
+            
         }
-        
+        public class Counter
+        {
+            private static readonly Counter instance = new Counter();
+            private  int countvalue;
+            private Counter()
+            {
+                countvalue = 10;
+            }
+
+            public static Counter GetCounter()
+            {
+                return instance;
+            }
+            public int Increment
+            {
+                get
+                {
+                    int inc = countvalue;
+                    return inc + 1;
+                }
+            }
+
+            public int Decrement
+            {
+                get
+                {
+                    int dec = countvalue;
+                    return dec - 1;
+                }
+
+            }
+        }
     }
 }
